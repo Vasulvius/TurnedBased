@@ -176,9 +176,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("_bodyParts")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("_bodyParts", "_actionPanel")]
 script = ExtResource("1_5ukpr")
 _bodyParts = [NodePath("Body/AnimatedSprite2D"), NodePath("Weapon/AnimatedSprite2D"), NodePath("Legs/AnimatedSprite2D")]
+_actionPanel = NodePath("ActionPanel")
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -200,3 +201,19 @@ speed_scale = 3.0
 sprite_frames = SubResource("SpriteFrames_bqt84")
 animation = &"Slash"
 speed_scale = 3.0
+
+[node name="ActionPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Attack" type="Button" parent="ActionPanel"]
+layout_mode = 0
+offset_left = -32.0
+offset_top = 64.0
+offset_right = 26.0
+offset_bottom = 95.0
+text = "Attack"
+
+[connection signal="pressed" from="ActionPanel/Attack" to="." method="Attack"]

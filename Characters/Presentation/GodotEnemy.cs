@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Godot;
 using Player.Domain.Models;
 
@@ -9,6 +11,14 @@ public partial class GodotEnemy : Character
     public override void _Ready() { }
 
     public override void _Process(double delta) { }
+
+    public async void Play()
+    {
+        // TODO: add AI logic
+        await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
+        Attack();
+        GodotTurnManager.Instance.EndTurn(this);
+    }
 
     private void Attack()
     {

@@ -3,14 +3,13 @@ using Godot;
 public partial class GodotTurnManager : Node
 {
     [Export]
-    private Character _player;
+    private GodotPlayer _player;
 
     [Export]
-    private Character _enemy;
+    private GodotEnemy _enemy;
 
     [Export]
     private Label _turnLabel;
-    private Character _currentCharacter;
     public static GodotTurnManager Instance { get; private set; }
 
     public override void _Ready()
@@ -24,28 +23,34 @@ public partial class GodotTurnManager : Node
 
         Instance = this;
 
-        SwitchCurrentCharacter();
+        SwitchCurrentCharacterTo(_player);
     }
 
-    public override void _Process(double delta) { }
-
-    public void SwitchCurrentCharacter()
+    public async void EndTurn(Character character)
     {
-        if (_currentCharacter == _enemy || _currentCharacter is null)
+        await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
+        if (character == _player)
         {
-            _currentCharacter = _player;
-            EnablePlayerActions();
-            _turnLabel.Text = "Player's turn";
+            SwitchCurrentCharacterTo(_enemy);
         }
         else
         {
-            _currentCharacter = _enemy;
-            DisablePlayerActions();
-            _turnLabel.Text = "Enemy's turn";
+            SwitchCurrentCharacterTo(_player);
         }
     }
 
-    private void EnablePlayerActions() { }
-
-    private void DisablePlayerActions() { }
+    private void SwitchCurrentCharacterTo(Character character)
+    {
+        if (character == _player)
+        {
+            _turnLabel.Text = "Player's turn";
+            _player.EnableActionPanel();
+        }
+        else
+        {
+            _turnLabel.Text = "Enemy's turn";
+            _player.DisableActionPanel();
+            _enemy.Play();
+        }
+    }
 }

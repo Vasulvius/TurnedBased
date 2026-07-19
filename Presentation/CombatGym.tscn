@@ -16,6 +16,5 @@ _enemy = NodePath("../Enemy")
 [node name="Player" parent="." instance=ExtResource("1_u2o6o")]
 position = Vector2(256, 344)
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("_bodyParts") instance=ExtResource("2_pw81f")]
+[node name="Enemy" parent="." instance=ExtResource("2_pw81f")]
 position = Vector2(896, 344)
-_bodyParts = []

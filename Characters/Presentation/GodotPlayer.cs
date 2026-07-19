@@ -6,17 +6,14 @@ public partial class GodotPlayer : Character
     [Export]
     private AnimatedSprite2D[] _bodyParts;
 
+    [Export]
+    private Control _actionPanel;
+
     public override void _Ready() { }
 
-    public override void _Process(double delta)
-    {
-        if (Input.IsActionJustPressed("test"))
-        {
-            AttackSlash();
-        }
-    }
+    public override void _Process(double delta) { }
 
-    private void AttackSlash()
+    private void Attack()
     {
         foreach (AnimatedSprite2D bodyPart in _bodyParts)
         {
@@ -25,5 +22,17 @@ public partial class GodotPlayer : Character
                 bodyPart.Play(CharacterActions.Slash.ToString());
             }
         }
+
+        GodotTurnManager.Instance.EndTurn(this);
+    }
+
+    public void EnableActionPanel()
+    {
+        _actionPanel.Visible = true;
+    }
+
+    public void DisableActionPanel()
+    {
+        _actionPanel.Visible = false;
     }
 }
