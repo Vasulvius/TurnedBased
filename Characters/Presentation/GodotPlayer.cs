@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.Marshalling;
 using Godot;
 using Player.Domain.Models;
 
@@ -9,11 +10,25 @@ public partial class GodotPlayer : Character
     [Export]
     private Control _actionPanel;
 
-    public override void _Ready() { }
+    [Export]
+    private GodotLifeBar _lifeBar;
+    private int _maxLife = 100;
+    private int _currentLife;
+    private int _damage = 15;
 
-    public override void _Process(double delta) { }
+    public override void _Ready()
+    {
+        _lifeBar.Init(_maxLife);
+        _currentLife = _maxLife;
+    }
 
-    private void Attack()
+    public void TakeDamage(int Damage)
+    {
+        _currentLife -= Damage;
+        _lifeBar.SetValue(_currentLife);
+    }
+
+    private async void Attack()
     {
         foreach (AnimatedSprite2D bodyPart in _bodyParts)
         {
@@ -22,6 +37,9 @@ public partial class GodotPlayer : Character
                 bodyPart.Play(CharacterActions.Slash.ToString());
             }
         }
+        // TODO: replace with awaiting end of animation
+        await ToSignal(GetTree().CreateTimer(0.3), Timer.SignalName.Timeout);
+        GodotTurnManager.Instance.DealDamage(_damage, this);
 
         GodotTurnManager.Instance.EndTurn(this);
     }

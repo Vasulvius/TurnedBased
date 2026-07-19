@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dh6vpqe1oi118"]
+[gd_scene load_steps=21 format=3 uid="uid://dh6vpqe1oi118"]
 
 [ext_resource type="Script" uid="uid://sycaat0a4ai1" path="res://Characters/Presentation/GodotEnemy.cs" id="1_2p3tk"]
 [ext_resource type="Texture2D" uid="uid://b8qafdt1qcl2n" path="res://Assets/lpc_entry/png/slash/BODY_skeleton.png" id="1_6m057"]
 [ext_resource type="Texture2D" uid="uid://vmoku2o2daic" path="res://Assets/lpc_entry/png/slash/WEAPON_dagger.png" id="2_xosda"]
+[ext_resource type="PackedScene" uid="uid://bhkmf72jj43xc" path="res://Characters/Presentation/LifeBar.tscn" id="4_fdjeg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xosda"]
 atlas = ExtResource("1_6m057")
@@ -118,9 +119,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="Node2D" node_paths=PackedStringArray("_bodyParts")]
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("_bodyParts", "_lifeBar")]
 script = ExtResource("1_2p3tk")
 _bodyParts = [NodePath("Body/AnimatedSprite2D"), NodePath("Weapon/AnimatedSprite2D")]
+_lifeBar = NodePath("LifeBar")
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -137,3 +139,7 @@ animation = &"Slash"
 frame = 6
 frame_progress = 1.0
 speed_scale = 3.0
+
+[node name="LifeBar" parent="." instance=ExtResource("4_fdjeg")]
+offset_top = -80.0
+offset_bottom = -80.0

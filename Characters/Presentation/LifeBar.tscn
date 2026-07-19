@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhkmf72jj43xc"]
+
+[ext_resource type="Script" uid="uid://tjq3m5v5gjm5" path="res://Characters/Presentation/GodotLifeBar.cs" id="1_hdva4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u62ns"]
+bg_color = Color(0.4106515, 0.14962348, 0.17021278, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hdva4"]
+bg_color = Color(0.38488126, 0.5728047, 0.024885908, 1)
+
+[node name="LifeBar" type="Control" node_paths=PackedStringArray("_label", "_bar")]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_hdva4")
+_label = NodePath("ProgressBar/Label")
+_bar = NodePath("ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = -48.0
+offset_right = 52.0
+offset_bottom = 20.0
+theme_override_styles/background = SubResource("StyleBoxFlat_u62ns")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hdva4")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "50"
+horizontal_alignment = 1

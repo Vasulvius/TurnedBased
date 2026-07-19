@@ -26,10 +26,22 @@ public partial class GodotTurnManager : Node
         SwitchCurrentCharacterTo(_player);
     }
 
-    public async void EndTurn(Character character)
+    public void DealDamage(int Damage, Character from)
+    {
+        if (from == _player)
+        {
+            _enemy.TakeDamage(Damage);
+        }
+        else
+        {
+            _player.TakeDamage(Damage);
+        }
+    }
+
+    public async void EndTurn(Character from)
     {
         await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
-        if (character == _player)
+        if (from == _player)
         {
             SwitchCurrentCharacterTo(_enemy);
         }

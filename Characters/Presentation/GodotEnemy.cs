@@ -8,9 +8,23 @@ public partial class GodotEnemy : Character
     [Export]
     private AnimatedSprite2D[] _bodyParts;
 
-    public override void _Ready() { }
+    [Export]
+    private GodotLifeBar _lifeBar;
+    private int _maxLife = 50;
+    private int _currentLife;
+    private int _damage = 10;
 
-    public override void _Process(double delta) { }
+    public override void _Ready()
+    {
+        _lifeBar.Init(_maxLife);
+        _currentLife = _maxLife;
+    }
+
+    public void TakeDamage(int Damage)
+    {
+        _currentLife -= Damage;
+        _lifeBar.SetValue(_currentLife);
+    }
 
     public async void Play()
     {
@@ -20,7 +34,7 @@ public partial class GodotEnemy : Character
         GodotTurnManager.Instance.EndTurn(this);
     }
 
-    private void Attack()
+    private async void Attack()
     {
         foreach (AnimatedSprite2D bodyPart in _bodyParts)
         {
@@ -29,5 +43,9 @@ public partial class GodotEnemy : Character
                 bodyPart.Play(CharacterActions.Slash.ToString());
             }
         }
+        // TODO: replace with awaiting end of animation
+        await ToSignal(GetTree().CreateTimer(0.3), Timer.SignalName.Timeout);
+
+        GodotTurnManager.Instance.DealDamage(_damage, this);
     }
 }

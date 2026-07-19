@@ -1,9 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://dno86l7qmoidm"]
+[gd_scene load_steps=30 format=3 uid="uid://dno86l7qmoidm"]
 
 [ext_resource type="Script" uid="uid://c7w6a6kex2sfg" path="res://Characters/Presentation/GodotPlayer.cs" id="1_5ukpr"]
 [ext_resource type="Texture2D" uid="uid://vmoku2o2daic" path="res://Assets/lpc_entry/png/slash/WEAPON_dagger.png" id="2_5ukpr"]
 [ext_resource type="Texture2D" uid="uid://cg573ncyt6kky" path="res://Assets/lpc_entry/png/slash/BODY_human.png" id="2_13dlg"]
 [ext_resource type="Texture2D" uid="uid://chp2qi1knb7q7" path="res://Assets/lpc_entry/png/slash/LEGS_pants_greenish.png" id="4_13dlg"]
+[ext_resource type="PackedScene" uid="uid://bhkmf72jj43xc" path="res://Characters/Presentation/LifeBar.tscn" id="5_hk124"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j1gt4"]
 atlas = ExtResource("2_13dlg")
@@ -176,10 +177,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("_bodyParts", "_actionPanel")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("_bodyParts", "_actionPanel", "_lifeBar")]
 script = ExtResource("1_5ukpr")
 _bodyParts = [NodePath("Body/AnimatedSprite2D"), NodePath("Weapon/AnimatedSprite2D"), NodePath("Legs/AnimatedSprite2D")]
 _actionPanel = NodePath("ActionPanel")
+_lifeBar = NodePath("LifeBar")
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -215,5 +217,9 @@ offset_top = 64.0
 offset_right = 26.0
 offset_bottom = 95.0
 text = "Attack"
+
+[node name="LifeBar" parent="." instance=ExtResource("5_hk124")]
+offset_top = -80.0
+offset_bottom = -80.0
 
 [connection signal="pressed" from="ActionPanel/Attack" to="." method="Attack"]
