@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv6tqe1501vp"]
+[gd_scene load_steps=4 format=3 uid="uid://cv6tqe1501vp"]
 
+[ext_resource type="PackedScene" uid="uid://x7rvjk1pqojo" path="res://Combat/Presentation/TurnManager.tscn" id="1_0pajv"]
 [ext_resource type="PackedScene" uid="uid://dno86l7qmoidm" path="res://Characters/Presentation/Player.tscn" id="1_u2o6o"]
 [ext_resource type="PackedScene" uid="uid://dh6vpqe1oi118" path="res://Characters/Presentation/Enemy.tscn" id="2_pw81f"]
 
@@ -7,6 +8,10 @@
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+
+[node name="TurnManager" parent="." node_paths=PackedStringArray("_player", "_enemy") instance=ExtResource("1_0pajv")]
+_player = NodePath("../Player")
+_enemy = NodePath("../Enemy")
 
 [node name="Player" parent="." instance=ExtResource("1_u2o6o")]
 position = Vector2(256, 344)

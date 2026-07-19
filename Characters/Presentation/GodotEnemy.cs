@@ -1,7 +1,7 @@
 using Godot;
 using Player.Domain.Models;
 
-public partial class GodotEnemy : Node2D
+public partial class GodotEnemy : Character
 {
     [Export]
     private AnimatedSprite2D[] _bodyParts;
