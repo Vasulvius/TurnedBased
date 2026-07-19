@@ -1,0 +1,139 @@
+[gd_scene load_steps=20 format=3 uid="uid://dh6vpqe1oi118"]
+
+[ext_resource type="Script" uid="uid://sycaat0a4ai1" path="res://Characters/Presentation/GodotEnemy.cs" id="1_2p3tk"]
+[ext_resource type="Texture2D" uid="uid://b8qafdt1qcl2n" path="res://Assets/lpc_entry/png/slash/BODY_skeleton.png" id="1_6m057"]
+[ext_resource type="Texture2D" uid="uid://vmoku2o2daic" path="res://Assets/lpc_entry/png/slash/WEAPON_dagger.png" id="2_xosda"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xosda"]
+atlas = ExtResource("1_6m057")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p3tk"]
+atlas = ExtResource("1_6m057")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdjeg"]
+atlas = ExtResource("1_6m057")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3lj0"]
+atlas = ExtResource("1_6m057")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lavym"]
+atlas = ExtResource("1_6m057")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0plgy"]
+atlas = ExtResource("1_6m057")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pobdi"]
+atlas = ExtResource("1_6m057")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ep5xp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xosda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p3tk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdjeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3lj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lavym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0plgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pobdi")
+}],
+"loop": false,
+"name": &"Slash",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep5xp"]
+atlas = ExtResource("2_xosda")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8mci"]
+atlas = ExtResource("2_xosda")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8yy0"]
+atlas = ExtResource("2_xosda")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kg2f"]
+atlas = ExtResource("2_xosda")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sjld"]
+atlas = ExtResource("2_xosda")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0ja1"]
+atlas = ExtResource("2_xosda")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0stu1"]
+atlas = ExtResource("2_xosda")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x8mci"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep5xp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8mci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8yy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kg2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sjld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0ja1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0stu1")
+}],
+"loop": false,
+"name": &"Slash",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("_bodyParts")]
+script = ExtResource("1_2p3tk")
+_bodyParts = [NodePath("Body/AnimatedSprite2D"), NodePath("Weapon/AnimatedSprite2D")]
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
+sprite_frames = SubResource("SpriteFrames_ep5xp")
+animation = &"Slash"
+speed_scale = 3.0
+
+[node name="Weapon" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Weapon"]
+sprite_frames = SubResource("SpriteFrames_x8mci")
+animation = &"Slash"
+frame = 6
+frame_progress = 1.0
+speed_scale = 3.0
