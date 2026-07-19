@@ -1,32 +1,10 @@
-using System.Runtime.InteropServices.Marshalling;
 using Godot;
 using Player.Domain.Models;
 
 public partial class GodotPlayer : Character
 {
     [Export]
-    private AnimatedSprite2D[] _bodyParts;
-
-    [Export]
     private Control _actionPanel;
-
-    [Export]
-    private GodotLifeBar _lifeBar;
-    private int _maxLife = 100;
-    private int _currentLife;
-    private int _damage = 15;
-
-    public override void _Ready()
-    {
-        _lifeBar.Init(_maxLife);
-        _currentLife = _maxLife;
-    }
-
-    public void TakeDamage(int Damage)
-    {
-        _currentLife -= Damage;
-        _lifeBar.SetValue(_currentLife);
-    }
 
     private async void Attack()
     {

@@ -1,29 +1,12 @@
-using System;
-using System.Linq;
 using Godot;
 using Player.Domain.Models;
 
 public partial class GodotEnemy : Character
 {
-    [Export]
-    private AnimatedSprite2D[] _bodyParts;
-
-    [Export]
-    private GodotLifeBar _lifeBar;
-    private int _maxLife = 50;
-    private int _currentLife;
-    private int _damage = 10;
-
     public override void _Ready()
     {
         _lifeBar.Init(_maxLife);
         _currentLife = _maxLife;
-    }
-
-    public void TakeDamage(int Damage)
-    {
-        _currentLife -= Damage;
-        _lifeBar.SetValue(_currentLife);
     }
 
     public async void Play()
