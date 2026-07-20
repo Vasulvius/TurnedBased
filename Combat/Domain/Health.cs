@@ -20,9 +20,7 @@ namespace Combat.Domain
             }
             if (max < current)
             {
-                throw new ArgumentException(
-                    "MaxHealth must be higther or equal than CurrentHealth"
-                );
+                throw new ArgumentException("MaxHealth must be higher or equal than CurrentHealth");
             }
             Max = max;
             Current = current;
@@ -33,13 +31,9 @@ namespace Combat.Domain
             return new Health(health, health);
         }
 
-        public Health Reduce(int damage)
+        public Health Reduce(Damage damage)
         {
-            if (damage < 0)
-            {
-                throw new ArgumentException("Damage must not be negative", nameof(damage));
-            }
-            return new Health(Max, Math.Max(Current - damage, 0));
+            return new Health(Max, Math.Max(Current - damage.Value, 0));
         }
     }
 }
