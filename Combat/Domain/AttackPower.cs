@@ -20,5 +20,10 @@ namespace Combat.Domain
         {
             return new AttackPower(value);
         }
+
+        public Damage ToDamage()
+        {
+            return Damage.Create(Value);
+        }
     }
 }
