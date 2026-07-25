@@ -10,7 +10,7 @@ namespace Combat.Domain
         public Defense Defense { get; }
         public bool IsDefeated => Health.IsDepleted;
 
-        public Combatant(CombatantBluePrint bluePrint)
+        public Combatant(CombatantBlueprint bluePrint)
         {
             Id = CombatantId.Create();
             Health = bluePrint.Health;

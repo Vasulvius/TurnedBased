@@ -5,15 +5,15 @@ namespace Combat.Application
 {
     public record StartCombatCommand
     {
-        public CombatantBluePrint[] CombatantStats { get; }
+        public CombatantBlueprint[] CombatantStats { get; }
 
         public StartCombatCommand((int Health, int AttackPower, int Defense)[] combatantStats)
         {
-            List<CombatantBluePrint> stats = new List<CombatantBluePrint>();
+            List<CombatantBlueprint> stats = new List<CombatantBlueprint>();
             foreach ((int Health, int AttackPower, int Defense) t in combatantStats)
             {
                 stats.Add(
-                    new CombatantBluePrint(
+                    new CombatantBlueprint(
                         Health.Create(t.Health),
                         AttackPower.Create(t.AttackPower),
                         Defense.Create(t.Defense)
