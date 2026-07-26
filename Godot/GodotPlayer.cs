@@ -3,7 +3,7 @@ using Godot;
 public partial class GodotPlayer : Character
 {
     [Export]
-    private Control _actionPanel;
+    private Control _actionPanel = null!;
 
     [Signal]
     public delegate void AttackRequestedEventHandler();

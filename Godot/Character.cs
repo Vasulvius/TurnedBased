@@ -4,13 +4,13 @@ using Godot;
 public partial class Character : Node2D
 {
     [Export]
-    protected AnimatedSprite2D[] _bodyParts;
+    protected AnimatedSprite2D[] _bodyParts = null!;
 
     [Export]
-    protected GodotLifeBar _lifeBar;
+    protected GodotLifeBar _lifeBar = null!;
 
     [Export]
-    public CombatantStats Stats { get; private set; }
+    public CombatantStats Stats { get; private set; } = null!;
     public CombatantId Id { get; protected set; } = CombatantId.Create();
 
     public override void _Ready()

@@ -7,13 +7,13 @@ using Godot;
 public partial class GodotCombat : Node
 {
     [Export]
-    private GodotPlayer _player;
+    private GodotPlayer _player = null!;
 
     [Export]
-    private GodotEnemy _enemy;
+    private GodotEnemy _enemy = null!;
 
     [Export]
-    private Label label;
+    private Label label = null!;
     private readonly CombatService _combatService = new CombatService();
 
     // Called when the node enters the scene tree for the first time.

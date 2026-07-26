@@ -3,10 +3,10 @@ using Godot;
 public partial class GodotLifeBar : Control
 {
     [Export]
-    private Label _label;
+    private Label _label = null!;
 
     [Export]
-    private ProgressBar _bar;
+    private ProgressBar _bar = null!;
 
     public void Init(int Maximum)
     {
