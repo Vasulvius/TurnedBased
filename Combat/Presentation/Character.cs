@@ -8,14 +8,14 @@ public partial class Character : Node2D
 
     [Export]
     protected GodotLifeBar _lifeBar;
+
+    [Export]
+    public CombatantStats Stats { get; private set; }
     public CombatantId Id { get; protected set; } = CombatantId.Create();
-    public int MaxHealth { get; protected set; } = 100;
-    public int AttackPower { get; protected set; } = 40;
-    public int Defense { get; protected set; } = 5;
 
     public override void _Ready()
     {
-        _lifeBar.Init(MaxHealth);
+        _lifeBar.Init(Stats.MaxHealth);
     }
 
     public void UpdateHealth(int Health)

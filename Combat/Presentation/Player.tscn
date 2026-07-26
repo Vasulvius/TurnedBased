@@ -1,10 +1,15 @@
-[gd_scene load_steps=30 format=3 uid="uid://dno86l7qmoidm"]
+[gd_scene load_steps=32 format=3 uid="uid://dno86l7qmoidm"]
 
-[ext_resource type="Script" uid="uid://c7w6a6kex2sfg" path="res://Characters/Presentation/GodotPlayer.cs" id="1_5ukpr"]
+[ext_resource type="Script" uid="uid://c7w6a6kex2sfg" path="res://Combat/Presentation/GodotPlayer.cs" id="1_5ukpr"]
 [ext_resource type="Texture2D" uid="uid://vmoku2o2daic" path="res://Assets/lpc_entry/png/slash/WEAPON_dagger.png" id="2_5ukpr"]
 [ext_resource type="Texture2D" uid="uid://cg573ncyt6kky" path="res://Assets/lpc_entry/png/slash/BODY_human.png" id="2_13dlg"]
+[ext_resource type="Script" uid="uid://corn4hq5h627k" path="res://Combat/Presentation/CombatantStats.cs" id="2_ug5ug"]
 [ext_resource type="Texture2D" uid="uid://chp2qi1knb7q7" path="res://Assets/lpc_entry/png/slash/LEGS_pants_greenish.png" id="4_13dlg"]
-[ext_resource type="PackedScene" uid="uid://bhkmf72jj43xc" path="res://Characters/Presentation/LifeBar.tscn" id="5_hk124"]
+[ext_resource type="PackedScene" uid="uid://bhkmf72jj43xc" path="res://Combat/Presentation/LifeBar.tscn" id="5_hk124"]
+
+[sub_resource type="Resource" id="Resource_8cgdi"]
+script = ExtResource("2_ug5ug")
+metadata/_custom_type_script = "uid://corn4hq5h627k"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j1gt4"]
 atlas = ExtResource("2_13dlg")
@@ -182,6 +187,7 @@ script = ExtResource("1_5ukpr")
 _actionPanel = NodePath("ActionPanel")
 _bodyParts = [NodePath("Body/AnimatedSprite2D"), NodePath("Weapon/AnimatedSprite2D"), NodePath("Legs/AnimatedSprite2D")]
 _lifeBar = NodePath("LifeBar")
+Stats = SubResource("Resource_8cgdi")
 
 [node name="Body" type="Node2D" parent="."]
 

@@ -22,16 +22,16 @@ public partial class GodotCombat : Node
         label.Visible = false;
         (CombatantId Id, int Health, int AttackPower, int Defense) player = (
             _player.Id,
-            _player.MaxHealth,
-            _player.AttackPower,
-            _player.Defense
+            _player.Stats.MaxHealth,
+            _player.Stats.AttackPower,
+            _player.Stats.Defense
         );
 
         (CombatantId Id, int Health, int AttackPower, int Defense) enemy = (
             _enemy.Id,
-            _enemy.MaxHealth,
-            _enemy.AttackPower,
-            _enemy.Defense
+            _enemy.Stats.MaxHealth,
+            _enemy.Stats.AttackPower,
+            _enemy.Stats.Defense
         );
         StartCombatCommand cmd = new StartCombatCommand([player, enemy]);
         _combatService.StartCombat(cmd);
