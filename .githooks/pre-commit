@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#
+# Pre-commit: protects the project's DDD architecture.
+#   1. Domain purity — no 'using Godot' in the business core (Core/).
+#   2. The project builds — otherwise the build fails and the commit is aborted.
+#
+# Enable (once per clone):  git config core.hooksPath .githooks
+#
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+# 1. Domain purity. The compiler already catches this (Core doesn't reference
+#    Godot), but this safeguard gives a clear, immediate message.
+if grep -rn --include="*.cs" --exclude-dir=obj --exclude-dir=bin "using Godot" Core/ 2>/dev/null; then
+    echo "❌ Domain purity violated: 'using Godot' found in Core/."
+    echo "   The business core must never depend on the engine. Commit aborted."
+    exit 1
+fi
+
+# 2. The code must build (which also enforces purity at the type level).
+echo "→ dotnet build…"
+if ! dotnet build --nologo -v q; then
+    echo "❌ Build failed — commit aborted."
+    exit 1
+fi
+
+echo "✅ Pre-commit OK."
