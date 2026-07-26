@@ -7,13 +7,16 @@ namespace Combat.Application
     {
         public CombatantBlueprint[] CombatantStats { get; }
 
-        public StartCombatCommand((int Health, int AttackPower, int Defense)[] combatantStats)
+        public StartCombatCommand(
+            (CombatantId Id, int Health, int AttackPower, int Defense)[] combatantStats
+        )
         {
             List<CombatantBlueprint> stats = new List<CombatantBlueprint>();
-            foreach ((int Health, int AttackPower, int Defense) t in combatantStats)
+            foreach ((CombatantId Id, int Health, int AttackPower, int Defense) t in combatantStats)
             {
                 stats.Add(
                     new CombatantBlueprint(
+                        t.Id,
                         Health.Create(t.Health),
                         AttackPower.Create(t.AttackPower),
                         Defense.Create(t.Defense)

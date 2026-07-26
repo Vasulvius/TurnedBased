@@ -79,6 +79,7 @@ namespace Combat.Domain
                         break;
                     }
                     PassToNextTurn();
+                    events.Add(new TurnStarted(TurnOrder.CurrentCombatant));
                     break;
                 default:
                     return new ActionRejected("Unknown type of action.");

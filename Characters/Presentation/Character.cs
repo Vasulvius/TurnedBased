@@ -1,3 +1,4 @@
+using Combat.Domain;
 using Godot;
 
 public partial class Character : Node2D
@@ -7,19 +8,29 @@ public partial class Character : Node2D
 
     [Export]
     protected GodotLifeBar _lifeBar;
-    protected int _maxLife = 100;
-    protected int _currentLife;
-    protected int _damage = 15;
+    public CombatantId Id { get; protected set; } = CombatantId.Create();
+    public int MaxHealth { get; protected set; } = 100;
+    public int AttackPower { get; protected set; } = 40;
+    public int Defense { get; protected set; } = 5;
 
     public override void _Ready()
     {
-        _lifeBar.Init(_maxLife);
-        _currentLife = _maxLife;
+        _lifeBar.Init(MaxHealth);
     }
 
-    public void TakeDamage(int Damage)
+    public void UpdateHealth(int Health)
     {
-        _currentLife -= Damage;
-        _lifeBar.SetValue(_currentLife);
+        _lifeBar.SetValue(Health);
+    }
+
+    public virtual void Attack()
+    {
+        foreach (AnimatedSprite2D bodyPart in _bodyParts)
+        {
+            if (bodyPart.SpriteFrames.HasAnimation("Slash"))
+            {
+                bodyPart.Play("Slash");
+            }
+        }
     }
 }

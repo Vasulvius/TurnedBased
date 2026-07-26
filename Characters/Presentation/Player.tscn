@@ -177,10 +177,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("_bodyParts", "_actionPanel", "_lifeBar")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("_actionPanel", "_bodyParts", "_lifeBar")]
 script = ExtResource("1_5ukpr")
-_bodyParts = [NodePath("Body/AnimatedSprite2D"), NodePath("Weapon/AnimatedSprite2D"), NodePath("Legs/AnimatedSprite2D")]
 _actionPanel = NodePath("ActionPanel")
+_bodyParts = [NodePath("Body/AnimatedSprite2D"), NodePath("Weapon/AnimatedSprite2D"), NodePath("Legs/AnimatedSprite2D")]
 _lifeBar = NodePath("LifeBar")
 
 [node name="Body" type="Node2D" parent="."]

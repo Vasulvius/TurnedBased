@@ -12,7 +12,7 @@ namespace Combat.Domain
 
         public Combatant(CombatantBlueprint bluePrint)
         {
-            Id = CombatantId.Create();
+            Id = bluePrint.Id;
             Health = bluePrint.Health;
             AttackPower = bluePrint.AttackPower;
             Defense = bluePrint.Defense;

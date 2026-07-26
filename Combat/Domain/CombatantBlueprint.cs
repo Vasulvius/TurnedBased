@@ -1,4 +1,9 @@
 namespace Combat.Domain
 {
-    public record CombatantBlueprint(Health Health, AttackPower AttackPower, Defense Defense);
+    public record CombatantBlueprint(
+        CombatantId Id,
+        Health Health,
+        AttackPower AttackPower,
+        Defense Defense
+    );
 }

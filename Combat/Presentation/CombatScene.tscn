@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba04jx5uufejw"]
+
+[ext_resource type="Script" uid="uid://ceri0o1jsaqv4" path="res://Combat/Presentation/GodotCombat.cs" id="1_fn62s"]
+[ext_resource type="PackedScene" uid="uid://dh6vpqe1oi118" path="res://Characters/Presentation/Enemy.tscn" id="2_pt0je"]
+[ext_resource type="PackedScene" uid="uid://dno86l7qmoidm" path="res://Characters/Presentation/Player.tscn" id="3_y4b1u"]
+
+[node name="Combat" type="Node" node_paths=PackedStringArray("_player", "_enemy", "label")]
+script = ExtResource("1_fn62s")
+_player = NodePath("Player")
+_enemy = NodePath("Enemy")
+label = NodePath("Label")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Player" parent="." instance=ExtResource("3_y4b1u")]
+position = Vector2(289, 339)
+
+[node name="Enemy" parent="." instance=ExtResource("2_pt0je")]
+position = Vector2(833, 352)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Player defeated!"
+horizontal_alignment = 1
