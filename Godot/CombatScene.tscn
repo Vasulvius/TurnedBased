@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://ba04jx5uufejw"]
 
-[ext_resource type="Script" uid="uid://ceri0o1jsaqv4" path="res://Combat/Presentation/GodotCombat.cs" id="1_fn62s"]
-[ext_resource type="PackedScene" uid="uid://dh6vpqe1oi118" path="res://Combat/Presentation/Enemy.tscn" id="2_pt0je"]
-[ext_resource type="PackedScene" uid="uid://dno86l7qmoidm" path="res://Combat/Presentation/Player.tscn" id="3_y4b1u"]
+[ext_resource type="Script" uid="uid://ceri0o1jsaqv4" path="res://Godot/GodotCombat.cs" id="1_fn62s"]
+[ext_resource type="PackedScene" uid="uid://dh6vpqe1oi118" path="res://Godot/Enemy.tscn" id="2_pt0je"]
+[ext_resource type="PackedScene" uid="uid://dno86l7qmoidm" path="res://Godot/Player.tscn" id="3_y4b1u"]
 
 [node name="Combat" type="Node" node_paths=PackedStringArray("_player", "_enemy", "label")]
 script = ExtResource("1_fn62s")
