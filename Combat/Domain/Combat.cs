@@ -39,6 +39,11 @@ namespace Combat.Domain
             _combatants = tempCombatants;
         }
 
+        public CombatSnapshot GetSnapshot()
+        {
+            return new CombatSnapshot(_combatants.Values.ToArray());
+        }
+
         public ActionResult ExecuteAction(CombatantId from, Action action)
         {
             var events = new List<DomainEvent>();

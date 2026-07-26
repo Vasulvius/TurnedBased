@@ -10,6 +10,15 @@ namespace Combat.Application
         public event EventHandler<DomainEvent>? CombatEvent;
         private Domain.Combat? _combat;
 
+        public CombatSnapshot GetView()
+        {
+            if (_combat is null)
+            {
+                throw new InvalidOperationException("Combat never started.");
+            }
+            return _combat.GetSnapshot();
+        }
+
         public void StartCombat(StartCombatCommand cmd)
         {
             List<Combatant> combatants = new List<Combatant>();
