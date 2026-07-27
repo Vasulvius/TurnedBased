@@ -1,44 +1,21 @@
-using System;
+using BuildingBlocks;
 
 namespace Combat.Domain
 {
-    public sealed class Combatant : IEquatable<Combatant>
+    public sealed class Combatant : Entity<CombatantId>
     {
-        public CombatantId Id { get; }
         public Health Health { get; private set; }
         public AttackPower AttackPower { get; }
         public Defense Defense { get; }
         public bool IsDefeated => Health.IsDepleted;
 
         public Combatant(CombatantBlueprint bluePrint)
+            : base(bluePrint.Id)
         {
-            Id = bluePrint.Id;
             Health = bluePrint.Health;
             AttackPower = bluePrint.AttackPower;
             Defense = bluePrint.Defense;
         }
-
-        public bool Equals(Combatant? other)
-        {
-            if (other is null)
-                return false;
-            if (ReferenceEquals(this, other))
-                return true;
-            return Id == other.Id;
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as Combatant);
-
-        public override int GetHashCode() => Id.GetHashCode();
-
-        public static bool operator ==(Combatant? left, Combatant? right)
-        {
-            if (left is null)
-                return right is null;
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(Combatant? left, Combatant? right) => !(left == right);
 
         public Damage TakeDamage(Damage rawDamage)
         {

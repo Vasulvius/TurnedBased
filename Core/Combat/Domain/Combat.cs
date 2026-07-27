@@ -6,9 +6,8 @@ using Combat.Domain.Events;
 
 namespace Combat.Domain
 {
-    public sealed class Combat : IEquatable<Combat>
+    public sealed class Combat : Entity<CombatId>
     {
-        public CombatId Id { get; }
         public TurnOrder TurnOrder { get; private set; }
         private readonly IReadOnlyDictionary<CombatantId, Combatant> _combatants;
         private bool _isCombatFinished
@@ -26,6 +25,7 @@ namespace Combat.Domain
         }
 
         public Combat(Combatant[] combatants)
+            : base(CombatId.Create())
         {
             Dictionary<CombatantId, Combatant> tempCombatants =
                 new Dictionary<CombatantId, Combatant>();
@@ -34,7 +34,6 @@ namespace Combat.Domain
                 tempCombatants.Add(combatant.Id, combatant);
             }
 
-            Id = CombatId.Create();
             TurnOrder = TurnOrder.Create(tempCombatants.Keys.ToArray());
             _combatants = tempCombatants;
         }
@@ -100,27 +99,5 @@ namespace Combat.Domain
             }
             TurnOrder = turnOrderCandidate;
         }
-
-        public bool Equals(Combat? other)
-        {
-            if (other is null)
-                return false;
-            if (ReferenceEquals(this, other))
-                return true;
-            return Id == other.Id;
-        }
-
-        public override bool Equals(object? obj) => Equals(obj as Combat);
-
-        public override int GetHashCode() => Id.GetHashCode();
-
-        public static bool operator ==(Combat? left, Combat? right)
-        {
-            if (left is null)
-                return right is null;
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(Combat? left, Combat? right) => !(left == right);
     }
 }
