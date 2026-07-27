@@ -49,42 +49,45 @@ namespace Combat.Domain
             var events = new List<DomainEvent>();
             if (TurnOrder.CurrentCombatant != from)
             {
-                return new ActionRejected("Action not possible, it is not the current combatant.");
+                return new ActionRejected(RejectionReason.NotCurrentCombatant);
             }
             if (_isCombatFinished)
             {
-                return new ActionRejected("Action not possible, the combat is finished.");
+                return new ActionRejected(RejectionReason.CombatFinished);
             }
-            switch (action)
+
+            return action switch
             {
-                case Attack attack:
-                    if (!_combatants.TryGetValue(attack.TargetId, out Combatant? target))
-                        return new ActionRejected("Cannot attack a null target.");
-                    if (target.IsDefeated)
-                        return new ActionRejected("Cannot attack a dead combatant.");
-                    Damage raw = _combatants[from].AttackPower.ToDamage();
+                Attack attack => HandleAttack(from, attack),
+                _ => throw new NotSupportedException($"Unhandled action: {action.GetType().Name}"),
+            };
+        }
 
-                    Damage net = target.TakeDamage(raw);
-                    events.Add(new DamageTaken(target.Id, net, target.Health.Current));
+        private ActionResult HandleAttack(CombatantId from, Attack attack)
+        {
+            List<DomainEvent> events = [];
+            if (!_combatants.TryGetValue(attack.TargetId, out Combatant? target))
+                return new ActionRejected(RejectionReason.TargetNotFound);
+            if (target.IsDefeated)
+                return new ActionRejected(RejectionReason.TargetDefeated);
+            Damage raw = _combatants[from].AttackPower.ToDamage();
 
-                    if (target.IsDefeated)
-                        events.Add(new CombatantDied(target.Id));
-                    if (_isCombatFinished)
-                    {
-                        CombatantId[] winners = _combatants
-                            .Values.Where(combatant => !combatant.IsDefeated)
-                            .Select(combatant => combatant.Id)
-                            .ToArray();
-                        events.Add(new CombatEnded(winners));
-                        break;
-                    }
-                    PassToNextTurn();
-                    events.Add(new TurnStarted(TurnOrder.CurrentCombatant));
-                    break;
-                default:
-                    return new ActionRejected("Unknown type of action.");
+            Damage net = target.TakeDamage(raw);
+            events.Add(new DamageTaken(target.Id, net, target.Health.Current));
+
+            if (target.IsDefeated)
+                events.Add(new CombatantDied(target.Id));
+            if (_isCombatFinished)
+            {
+                CombatantId[] winners = _combatants
+                    .Values.Where(combatant => !combatant.IsDefeated)
+                    .Select(combatant => combatant.Id)
+                    .ToArray();
+                events.Add(new CombatEnded(winners));
+                return new ActionApplied(events);
             }
-
+            PassToNextTurn();
+            events.Add(new TurnStarted(TurnOrder.CurrentCombatant));
             return new ActionApplied(events);
         }
 

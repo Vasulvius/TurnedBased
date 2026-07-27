@@ -5,7 +5,15 @@ namespace Combat.Domain
 {
     public abstract record ActionResult;
 
-    public sealed record ActionRejected(string Reason) : ActionResult;
-
     public sealed record ActionApplied(IReadOnlyList<DomainEvent> Events) : ActionResult;
+
+    public sealed record ActionRejected(RejectionReason Reason) : ActionResult;
+
+    public enum RejectionReason
+    {
+        NotCurrentCombatant,
+        TargetNotFound,
+        TargetDefeated,
+        CombatFinished,
+    }
 }
