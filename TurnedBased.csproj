@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Core/**" />
+    <Compile Remove="Tests/**" />
     <ProjectReference Include="Core/TurnedBased.Core.csproj" />
   </ItemGroup>
 </Project>

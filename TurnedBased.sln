@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnedBased", "TurnedBased.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnedBased.Core", "Core\TurnedBased.Core.csproj", "{99266D79-58D7-4871-B7B2-B8979E681ADC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{7256E67B-55E3-42C3-9758-66FF62BD7C91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{99266D79-58D7-4871-B7B2-B8979E681ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99266D79-58D7-4871-B7B2-B8979E681ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99266D79-58D7-4871-B7B2-B8979E681ADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7256E67B-55E3-42C3-9758-66FF62BD7C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7256E67B-55E3-42C3-9758-66FF62BD7C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7256E67B-55E3-42C3-9758-66FF62BD7C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7256E67B-55E3-42C3-9758-66FF62BD7C91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
