@@ -134,6 +134,37 @@ public class CombatTest
     }
     #endregion
 
+    #region Death and Victory
+    [Fact]
+    public void Lethal_attack_must_end_combat_properly()
+    {
+        // Given
+        var id1 = CombatantId.Create();
+        var id2 = CombatantId.Create();
+        var combat = MakeCombat([
+            new CombatantSpec(Id: id1, Atk: 100),
+            new CombatantSpec(Id: id2, Hp: 1, Def: 0),
+        ]);
+
+        // When
+        var result = combat.ExecuteAction(id1, new Attack(id2));
+
+        // Then
+        var applied = Assert.IsType<ActionApplied>(result);
+        Assert.Equal(3, applied.Events.Count);
+
+        var damage = Assert.IsType<DamageTaken>(applied.Events[0]);
+        Assert.Equal(new DamageTaken(id2, Damage.Create(100), 0), damage);
+
+        var died = Assert.IsType<CombatantDied>(applied.Events[1]);
+        Assert.Equal(new CombatantDied(id2), died);
+
+        var end = Assert.IsType<CombatEnded>(applied.Events[2]);
+        Assert.Single(end.Winners);
+        Assert.Equal(id1, end.Winners[0]);
+    }
+    #endregion
+
     #region GetSnapshot
     [Fact]
     public void GetSnapshot_is_correct_after_combat_instantiation()

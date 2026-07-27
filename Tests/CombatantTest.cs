@@ -90,7 +90,7 @@ public class CombatantTest
     }
 
     [Fact]
-    public void Take_letal_damage_must_defeate_combatant()
+    public void Take_lethal_damage_must_defeate_combatant()
     {
         // Arrange
         var damage = Damage.Create(110);
@@ -104,7 +104,7 @@ public class CombatantTest
     }
 
     [Fact]
-    public void Take_not_letal_damage_must_keep_combatant_undefeated()
+    public void Take_not_lethal_damage_must_keep_combatant_undefeated()
     {
         // Arrange
         var damage = Damage.Create(10);
