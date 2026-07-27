@@ -81,5 +81,4 @@ git config core.hooksPath .githooks
 
 ## Coming up
 
-- **Tests** — since the domain has no Godot dependency, it can be tested in pure C#, without launching the engine.
 - Initiative mechanics, target selection, reasoning AI, save system.
