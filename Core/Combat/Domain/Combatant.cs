@@ -9,12 +9,12 @@ namespace Combat.Domain
         public Defense Defense { get; }
         public bool IsDefeated => Health.IsDepleted;
 
-        public Combatant(CombatantBlueprint bluePrint)
-            : base(bluePrint.Id)
+        public Combatant(CombatantBlueprint blueprint)
+            : base(blueprint.Id)
         {
-            Health = bluePrint.Health;
-            AttackPower = bluePrint.AttackPower;
-            Defense = bluePrint.Defense;
+            Health = blueprint.Health;
+            AttackPower = blueprint.AttackPower;
+            Defense = blueprint.Defense;
         }
 
         public Damage TakeDamage(Damage rawDamage)
